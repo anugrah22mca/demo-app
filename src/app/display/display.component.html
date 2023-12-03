@@ -1,0 +1,9 @@
+<!-- display.component.html -->
+<div>
+    <button (click)="loadFileData()">View File</button>
+    <div *ngIf="fileData">
+      <!-- Display line chart using fileData -->
+      <div>{{ fileData }}</div>
+    </div>
+  </div>
+  

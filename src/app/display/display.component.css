@@ -1,0 +1,13 @@
+/* display.component.css */
+div {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 8px 12px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
