@@ -19,6 +19,23 @@ export class DisplayComponent {
         (data) => {
           console.log('File data retrieved successfully:', data);
           this.fileData = data;
+
+          // Handle the response as needed
+        },
+        (error) => {
+          console.error('Error retrieving file data', error);
+          // Handle the error as needed
+        }
+      );
+    }
+  }
+  getData(): void {
+    if (this.fileName) {
+      this.s3Service.getData(this.fileName).subscribe(
+        (data) => {
+          console.log('File data retrieved successfully:', data);
+          this.fileData = data;
+
           // Handle the response as needed
         },
         (error) => {

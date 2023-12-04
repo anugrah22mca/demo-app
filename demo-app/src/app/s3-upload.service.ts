@@ -25,4 +25,7 @@ export class S3UploadService {
   getFileData(fileName: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/file/${fileName}`);
   }
+  getData(fileSName: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/download/${fileSName}`);
+  }
 }

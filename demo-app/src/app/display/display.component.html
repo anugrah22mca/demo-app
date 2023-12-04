@@ -1,9 +1,20 @@
 <!-- display.component.html -->
 <div class="display-container">
   <input type="text" [(ngModel)]="fileName" placeholder="Enter file name" />
-  <button (click)="getFileData()">Get File Data</button>
+  <button (click)="getFileData()">Get File Details</button>
   <div *ngIf="fileData" class="file-data">
     <h2>File Data</h2>
     <pre>{{ fileData | json }}</pre>
   </div>
+  <!-- <button (click)="getData()">Get File Data</button> -->
+  <!-- <div *ngIf="fileData" class="file-data">
+    <table>
+      <tr>
+        <th>timstamp</th>
+      </tr>
+      <tr>
+        <th *ngFor="let file of fileData">{{file}}</th>
+      </tr>
+    </table>
+  </div> -->
 </div>

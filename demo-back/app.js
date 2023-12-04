@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer');
@@ -23,6 +24,25 @@ const upload = multer({ storage: storage });
 app.use(cors());
 app.use(express.json());
 
+app.get("/download/:filename", async (req, res) => {
+  const filename = req.params.filename
+  let x = await s3.getObject({ Bucket: "hackathonanugrah", Key: filename }).promise();
+  console.log(x)
+  res.json(x.Body)
+})
+
+app.get('/getfiles',async(req,res)=>{
+  var bucketParams = {
+    Bucket: 'hackathonanugrah',
+  };
+  s3.listObjects(bucketParams, function(err, data) {
+    if (err) {
+      console.log("Error", err);
+    } else {
+      console.log("Success", data);
+    }
+  });
+})
 app.post('/upload', upload.single('file'), async (req, res) => {
   const { originalname, buffer } = req.file;
 
