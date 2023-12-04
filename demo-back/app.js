@@ -1,0 +1,81 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const multer = require('multer');
+const AWS = require('aws-sdk');
+const Upload = require('./models/upload');
+const cors = require('cors');
+
+const app = express();
+const port = 3000;
+
+mongoose.connect('mongodb://localhost:27017/s3uploads', { useNewUrlParser: true, useUnifiedTopology: true });
+
+AWS.config.update({
+  accessKeyId: 'AKIAR5DMD7NMRBLRBLHP',
+  secretAccessKey: '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',
+  region: 'ap-south-1',
+});
+
+const s3 = new AWS.S3();
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+app.use(cors());
+app.use(express.json());
+
+app.post('/upload', upload.single('file'), async (req, res) => {
+  const { originalname, buffer } = req.file;
+
+  const params = {
+    Bucket: 'hackathonanugrah',
+    Key: originalname,
+    Body: buffer,
+  };
+
+  try {
+    await s3.upload(params).promise();
+
+    const uploadData = {
+      fileName: originalname,
+      s3Url: `https://s3://hackathonanugrah/data/${originalname}`,
+    };
+
+    const uploadRecord = new Upload(uploadData);
+    await uploadRecord.save();
+
+    res.json(uploadData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/files', async (req, res) => {
+  try {
+    const files = await Upload.find({}, 'fileName s3Url uploadDate');
+    res.json(files);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/file/:fileName', async (req, res) => {
+  const { fileName } = req.params;
+
+  try {
+    const fileData = await Upload.findOne({ fileName }, 'fileName s3Url uploadDate');
+    if (fileData) {
+      res.json(fileData);
+    } else {
+      res.status(404).send('File not found');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});
