@@ -1,5 +1,7 @@
 <!-- list.component.html -->
-<ul>
-    <li *ngFor="let file of files">{{ file.Key }}</li>
+<div class="list-container">
+  <h2>Uploaded Files</h2>
+  <ul>
+    <li *ngFor="let file of files">{{ file.fileName }}</li>
   </ul>
-  
+</div>

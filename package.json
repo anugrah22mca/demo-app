@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "angular-google-charts": "^2.2.3",
     "aws-sdk": "^2.1510.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",

@@ -1,9 +1,9 @@
 <!-- display.component.html -->
-<div>
-    <button (click)="loadFileData()">View File</button>
-    <div *ngIf="fileData">
-      <!-- Display line chart using fileData -->
-      <div>{{ fileData }}</div>
-    </div>
+<div class="display-container">
+  <input type="text" [(ngModel)]="fileName" placeholder="Enter file name" />
+  <button (click)="getFileData()">Get File Data</button>
+  <div *ngIf="fileData" class="file-data">
+    <h2>File Data</h2>
+    <pre>{{ fileData | json }}</pre>
   </div>
-  
+</div>

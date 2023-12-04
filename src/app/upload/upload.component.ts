@@ -1,6 +1,6 @@
 // upload.component.ts
 import { Component } from '@angular/core';
-import { S3Service } from '../s3.service';
+import { S3UploadService } from '../s3-upload.service';
 
 @Component({
   selector: 'app-upload',
@@ -10,7 +10,7 @@ import { S3Service } from '../s3.service';
 export class UploadComponent {
   selectedFile: File | null = null;
 
-  constructor(private s3Service: S3Service) {}
+  constructor(private s3Service: S3UploadService) {}
 
   onFileChange(event: any): void {
     this.selectedFile = event.target.files[0];
@@ -18,9 +18,16 @@ export class UploadComponent {
 
   uploadFile(): void {
     if (this.selectedFile) {
-      this.s3Service.uploadFile(this.selectedFile, 'your-bucket-name', 'sensor_data.json')
-        .then(() => console.log('File uploaded successfully'))
-        .catch(err => console.error('Error uploading file', err));
+      this.s3Service.uploadFile(this.selectedFile).subscribe(
+        (data) => {
+          console.log('File uploaded successfully:', data);
+          // Handle the response as needed
+        },
+        (error) => {
+          console.error('Error uploading file', error);
+          // Handle the error as needed
+        }
+      );
     }
   }
 }
