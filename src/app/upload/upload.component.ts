@@ -1,4 +1,3 @@
-// upload.component.ts
 import { Component } from '@angular/core';
 import { S3UploadService } from '../s3-upload.service';
 

@@ -9,6 +9,8 @@ import { DisplayComponent } from './display/display.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     UploadComponent,
     ListComponent,
     DisplayComponent,
+    FooterComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
