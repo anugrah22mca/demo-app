@@ -9,7 +9,7 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
-mongoose.connect('mongodb://localhost:27017/s3uploads', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://22mp1941:FfDJ5oconjAniuPt@cluster0.g5nm7u3.mongodb.net/demo-app', { useNewUrlParser: true, useUnifiedTopology: true });
 
 AWS.config.update({
   accessKeyId: 'AKIAR5DMD7NMRBLRBLHP',
