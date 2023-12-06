@@ -21,6 +21,7 @@ export class UploadComponent {
         (data) => {
           console.log('File uploaded successfully:', data);
           // Handle the response as needed
+          alert('File uploaded successfully:')
         },
         (error) => {
           console.error('Error uploading file', error);
