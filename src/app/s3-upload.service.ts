@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class S3UploadService {
-  private apiUrl = 'http://13.232.185.3'; // Replace with your Node.js server URL
+  private apiUrl = 'http://13.232.185.3/api'; // Replace with your Node.js server URL
 
   constructor(private http: HttpClient) {}
 
